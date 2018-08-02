@@ -1,0 +1,13 @@
+// Settings supported by QSS.
+// 1. Common terms at the left side are extracted from
+// https://github.com/GPII/gpii-app/pull/48/files#diff-854e7c96442be6cafe779083bd503d63L-1
+// 2. Solution ids at the right side are extracted from win32.json5 by mapping common
+// terms to built-in or UIO+ solutions.
+{
+    "http://registry.gpii.net/common/DPIScale": "com.microsoft.windows.screenDPI",
+    "http://registry.gpii.net/common/language": "com.microsoft.windows.language",
+    "http://registry.gpii.net/common/fontSize": "net.gpii.uioPlus",
+    "http://registry.gpii.net/common/captions/enabled": "net.gpii.uioPlus",
+    "http://registry.gpii.net/common/highContrastTheme": "com.microsoft.windows.highContrast",
+    "http://registry.gpii.net/common/selfVoicing/enabled": "net.gpii.uioPlus"
+}
