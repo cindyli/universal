@@ -50,10 +50,10 @@ gpii.tests.untrusted.userLogonHandling.nonexistentKeyInTestDefs = [{
     name: "Testing keyin and keyout with a nonexistent GPII key using a client credential that has privilege to access nonexistent GPII keys",
     expect: 2,
     distributeOptions: {
-        "test.clientCredentialFilePath": {
+        "test.publicClientCredentialFilePath": {
             "record": "%gpii-universal/tests/data/clientCredentials/nova.json",
-            "target": "{that gpii.flowManager.untrusted settingsDataSource}.options.clientCredentialFilePath",
-            priority: "after:flowManager.clientCredentialFilePath"
+            "target": "{that gpii.flowManager.untrusted settingsDataSource}.options.publicClientCredentialFilePath",
+            priority: "after:flowManager.publicClientCredentialFilePath"
         }
     },
     sequence: [{
