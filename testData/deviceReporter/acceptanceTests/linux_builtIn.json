@@ -16,5 +16,8 @@
     },
     {
         "id": "org.gnome.orca"
+    },
+    {
+        "id": "net.gpii.uioPlus"
     }
 ]
