@@ -128,7 +128,7 @@ gpii.migration.GPII4014.verifyDocsData = function (responseString, options) {
                     };
                     var diffResult = fluid.model.diff(
                         docFields,
-                        options.novaClientCredentials.includes(aDoc._id) ? gpii.migration.GPII4014.newValuesForNovaClientCredential : gpii.migration.GPII4014.newValuesForPublicClientCredential
+                        options.novaClientCredentials.includes(aDoc._id) ? gpii.migration.GPII4014.newValuesForNovaClientCredential : gpii.migration.GPII4014.newValuesForLocalClientCredential
                     );
                     if (!diffResult) {
                         console.log("Error with the document _id \"" + aDoc._id + "\": new field values for client credential are incorrect - ", docFields);

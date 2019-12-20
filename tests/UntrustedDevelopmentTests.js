@@ -48,10 +48,10 @@ gpii.tests.development.nonexistentKeyInWithPrivTestDefs = [{
     expect: 2,
     gpiiKey: "nonexistent_gpii_key",
     distributeOptions: {
-        "test.publicClientCredentialFilePath": {
+        "test.localClientCredentialFilePath": {
             "record": "%gpii-universal/tests/data/clientCredentials/nova.json",
-            "target": "{that gpii.flowManager.untrusted settingsDataSource}.options.publicClientCredentialFilePath",
-            priority: "after:flowManager.publicClientCredentialFilePath"
+            "target": "{that gpii.flowManager.untrusted settingsDataSource}.options.localClientCredentialFilePath",
+            priority: "after:flowManager.localClientCredentialFilePath"
         }
     },
     sequenceGrade: "gpii.tests.development.commonTestSequence"

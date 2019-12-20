@@ -107,7 +107,7 @@ gpii.migration.GPII4014.updateDocsData = function (responseString, options) {
                 aDoc = fluid.extend(
                     {},
                     aDoc,
-                    options.novaClientCredentials.includes(aDoc._id) ? gpii.migration.GPII4014.newValuesForNovaClientCredential : gpii.migration.GPII4014.newValuesForPublicClientCredential
+                    options.novaClientCredentials.includes(aDoc._id) ? gpii.migration.GPII4014.newValuesForNovaClientCredential : gpii.migration.GPII4014.newValuesForLocalClientCredential
                 );
                 console.log("Updating the client credential ID: ", aDoc._id);
                 updatedDocs.push(aDoc);

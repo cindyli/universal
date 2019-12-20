@@ -78,10 +78,10 @@ gpii.tests.untrusted.userLogonRequest.nonexistentKeyInTestDefs = [{
     expect: 2,
     gpiiKey: "bogusToken",
     distributeOptions: {
-        "test.publicClientCredentialFilePath": {
+        "test.localClientCredentialFilePath": {
             "record": "%gpii-universal/tests/data/clientCredentials/nova.json",
-            "target": "{that gpii.flowManager.untrusted settingsDataSource}.options.publicClientCredentialFilePath",
-            priority: "after:flowManager.publicClientCredentialFilePath"
+            "target": "{that gpii.flowManager.untrusted settingsDataSource}.options.localClientCredentialFilePath",
+            priority: "after:flowManager.localClientCredentialFilePath"
         }
     },
     sequence: [

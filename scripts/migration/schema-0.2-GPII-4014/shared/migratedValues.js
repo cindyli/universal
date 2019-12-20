@@ -35,7 +35,7 @@ gpii.migration.GPII4014.newValuesForNovaClientCredential = {
     "isCreatePrefsSafeAllowed": true
 };
 
-gpii.migration.GPII4014.newValuesForPublicClientCredential = {
+gpii.migration.GPII4014.newValuesForLocalClientCredential = {
     allowedIPBlocks: null,
     allowedPrefsToWrite: null,
     isCreateGpiiKeyAllowed: false,
