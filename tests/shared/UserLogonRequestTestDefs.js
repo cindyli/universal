@@ -15,7 +15,6 @@
 var fluid = require("infusion"),
     jqUnit = fluid.require("node-jqunit", require, "jqUnit"),
     gpii = fluid.registerNamespace("gpii");
-
 fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
@@ -203,11 +202,13 @@ gpii.tests.userLogonRequest.commonTestConfig = {
     distributeOptions: {
         "lifecycleManager.userErrorsListener": {
             "record": {
-                trackedUserErrors: {},
+                members: {
+                    trackedUserErrors: {}
+                },
                 listeners: {
                     "userError.trackReportedError": {
                         listener: "fluid.set",
-                        args: ["{that}.options.trackedUserErrors", "error", "{arguments}.0"]
+                        args: ["{that}.trackedUserErrors", "error", "{arguments}.0"]
                     }
                 }
             },
@@ -236,11 +237,13 @@ gpii.tests.userLogonRequest.buildTestDefs = function (testDefs, testType) {
             distributeOptions: {
                 "lifecycleManager.logonChangeListener": {
                     "record": {
-                        trackedLogonChange: [],
+                        members: {
+                            trackedLogonChange: []
+                        },
                         modelListeners: {
                             "logonChange": {
                                 listener: "gpii.tests.userLogonRequest.trackLogonChange",
-                                args: ["{that}.options.trackedLogonChange", "{change}.value", "{testCaseHolder}"]
+                                args: ["{that}.trackedLogonChange", "{change}.value", "{testCaseHolder}"]
                             }
                         }
                     },
@@ -276,7 +279,7 @@ gpii.tests.userLogonRequest.testDefs = [
             },
             {
                 funcName: "gpii.tests.userLogonRequest.checkLastModelChanges",
-                args: ["{lifecycleManager}.options.trackedLogonChange", "{that}.options.expectedModelChanges.proximityTriggeredLogon"] // trackedLogonChange, expectedModelChanges)
+                args: ["{lifecycleManager}.trackedLogonChange", "{that}.options.expectedModelChanges.proximityTriggeredLogon"] // trackedLogonChange, expectedModelChanges)
             },
             {
                 func: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
@@ -305,7 +308,7 @@ gpii.tests.userLogonRequest.testDefs = [
             },
             {
                 funcName: "gpii.tests.userLogonRequest.checkLastModelChanges",
-                args: ["{lifecycleManager}.options.trackedLogonChange", "{that}.options.expectedModelChanges.proximityTriggeredLogout"] // trackedLogonChange, expectedModelChanges)
+                args: ["{lifecycleManager}.trackedLogonChange", "{that}.options.expectedModelChanges.proximityTriggeredLogout"] // trackedLogonChange, expectedModelChanges)
             }
         ]
     },
@@ -346,7 +349,7 @@ gpii.tests.userLogonRequest.testDefs = [
             },
             {
                 funcName: "gpii.tests.userLogonRequest.checkLastModelChanges",
-                args: ["{lifecycleManager}.options.trackedLogonChange", "{that}.options.expectedModelChanges.secondProximityTriggered"] // trackedLogonChange, expectedModelChanges)
+                args: ["{lifecycleManager}.trackedLogonChange", "{that}.options.expectedModelChanges.secondProximityTriggered"] // trackedLogonChange, expectedModelChanges)
             }
         ]
     },
@@ -475,7 +478,7 @@ gpii.tests.userLogonRequest.testDefs = [
             {
                 event: "{lifecycleManager}.events.onQueueEmpty",
                 listener: "gpii.tests.userLogonRequest.checkLastModelChanges",
-                args: ["{lifecycleManager}.options.trackedLogonChange", "{that}.options.expectedModelChanges.noUserLogin"] // trackedLogonChange, expectedModelChanges)
+                args: ["{lifecycleManager}.trackedLogonChange", "{that}.options.expectedModelChanges.noUserLogin"] // trackedLogonChange, expectedModelChanges)
             }
         ]
     },
@@ -568,7 +571,7 @@ gpii.tests.userLogonRequest.testDefs = [
             },
             {
                 funcName: "gpii.tests.userLogonRequest.checkLastModelChanges",
-                args: ["{lifecycleManager}.options.trackedLogonChange", "{that}.options.expectedModelChanges.resetLogout"] // trackedLogonChange, expectedModelChanges)
+                args: ["{lifecycleManager}.trackedLogonChange", "{that}.options.expectedModelChanges.resetLogout"] // trackedLogonChange, expectedModelChanges)
             },
             {
                 // 6. Verify the default settings have been applied: stop the magnifier
@@ -656,7 +659,7 @@ gpii.tests.userLogonRequest.testDefs = [
                 task: "{lifecycleManager}.performLogout",
                 args: [gpii.tests.userLogonRequest.gpiiKey],
                 reject: "gpii.tests.userLogonRequest.testLogoutError",
-                rejectArgs: ["{arguments}.0", "{lifecycleManager}.userErrors.options.trackedUserErrors", {
+                rejectArgs: ["{arguments}.0", "{lifecycleManager}.userErrors.trackedUserErrors", {
                     "statusCode": 409,
                     "message": "Got logout request from user adjustCursor, but the user sammy is logged in. So ignoring the request.",
                     "ignoreUserErrors": false
@@ -676,7 +679,7 @@ gpii.tests.userLogonRequest.testDefs = [
             },
             {
                 funcName: "gpii.tests.userLogonRequest.checkLastModelChanges",
-                args: ["{lifecycleManager}.options.trackedLogonChange", "{that}.options.expectedModelChanges.noUserLogin"] // trackedLogonChange, expectedModelChanges)
+                args: ["{lifecycleManager}.trackedLogonChange", "{that}.options.expectedModelChanges.noUserLogin"] // trackedLogonChange, expectedModelChanges)
             }
         ]
     },
@@ -689,7 +692,7 @@ gpii.tests.userLogonRequest.testDefs = [
                 task: "{lifecycleManager}.performLogout",
                 args: [gpii.tests.userLogonRequest.gpiiKey],
                 reject: "gpii.tests.userLogonRequest.testLogoutError",
-                rejectArgs: ["{arguments}.0", "{lifecycleManager}.userErrors.options.trackedUserErrors", {
+                rejectArgs: ["{arguments}.0", "{lifecycleManager}.userErrors.trackedUserErrors", {
                     "statusCode": 409,
                     "message": "Got logout request from user adjustCursor, but the user noUser is logged in. So ignoring the request.",
                     "ignoreUserErrors": true
@@ -720,7 +723,7 @@ gpii.tests.userLogonRequest.testDefs = [
             },
             {
                 funcName: "gpii.tests.userLogonRequest.checkLastModelChanges",
-                args: ["{lifecycleManager}.options.trackedLogonChange", "{that}.options.expectedModelChanges.logoutNoUser"] // trackedLogonChange, expectedModelChanges)
+                args: ["{lifecycleManager}.trackedLogonChange", "{that}.options.expectedModelChanges.logoutNoUser"] // trackedLogonChange, expectedModelChanges)
             }
         ]
     },

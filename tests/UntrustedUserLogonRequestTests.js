@@ -13,7 +13,8 @@
 "use strict";
 
 var fluid = require("infusion"),
-    gpii = fluid.registerNamespace("gpii");
+    gpii = fluid.registerNamespace("gpii"),
+    jqUnit = fluid.registerNamespace("jqUnit");
 
 fluid.require("%gpii-universal");
 
@@ -23,8 +24,8 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.untrusted.userLogonRequest");
 
-// Specific tests for untrusted environment without database connection.
-// Test the user report on NoConnection when the cloud cannot be accessed
+//============ Tests for untrusted environment without database connection. ============
+// Test the user report the NoConnection error when the cloud cannot be accessed
 gpii.tests.untrusted.userLogonRequest.buildTestDefs = function (testDefs) {
     var config = {
         configName: "gpii.config.untrusted.development",
@@ -56,7 +57,7 @@ gpii.tests.untrusted.userLogonRequest.untrustedWithoutDbConnection = [{
                 "port": 8084,
                 "isError": true
             },
-            "{lifecycleManager}.userErrors.options.trackedUserErrors",
+            "{lifecycleManager}.userErrors.trackedUserErrors",
             {
                 "isError": true,
                 "messageKey": "NoConnection",
@@ -73,6 +74,7 @@ gpii.tests.untrusted.userLogonRequest.untrustedWithoutDbConnection = [{
     }]
 }];
 
+//============ Tests for client credentials that have access to auto create nonexistent keys ============
 gpii.tests.untrusted.userLogonRequest.nonexistentKeyInTestDefs = [{
     name: "Testing login and logout with a nonexistent GPII key using a client credential that has privilege to access nonexistent GPII keys",
     expect: 2,
@@ -119,7 +121,7 @@ gpii.tests.untrusted.userLogonRequest.nonexistentKeyInTestDefs = [{
                 "isError": true,
                 "statusCode": 401
             },
-            "{lifecycleManager}.userErrors.options.trackedUserErrors",
+            "{lifecycleManager}.userErrors.trackedUserErrors",
             {
                 "isError": true,
                 "messageKey": "KeyInFail",
@@ -127,6 +129,90 @@ gpii.tests.untrusted.userLogonRequest.nonexistentKeyInTestDefs = [{
             }
         ]
     }]
+}];
+
+//============ Tests for various operations by specifying the client credential type ============
+fluid.defaults("gpii.tests.untrusted.userLogonRequest.localClientCredentialDataSource", {
+    gradeNames: ["fluid.component"],
+    invokers: {
+        get: {
+            funcName: "gpii.tests.untrusted.userLogonRequest.getClientCredential",
+            args: ["pilot-computer", "pilot-computer-secret", "local", "{testCaseHolder}.trackedClientCredentialTypes"]
+        }
+    }
+});
+
+fluid.defaults("gpii.tests.untrusted.userLogonRequest.securedClientCredentialDataSource", {
+    gradeNames: ["fluid.component"],
+    invokers: {
+        get: {
+            funcName: "gpii.tests.untrusted.userLogonRequest.getClientCredential",
+            args: ["nova-computer", "nova-computer-secret", "secured", "{testCaseHolder}.trackedClientCredentialTypes"]
+        }
+    }
+});
+
+gpii.tests.untrusted.userLogonRequest.getClientCredential = function (client_id, client_secret, clientCredentialType, trackedClientCredentialTypes) {
+    trackedClientCredentialTypes.push(clientCredentialType);
+    return fluid.promise().resolve({
+        "client_id": client_id,
+        "client_secret": client_secret
+    });
+};
+
+gpii.tests.userLogonRequest.verifyUsedClientCredentialType = function (clientCredentialTypes, expectedClientCredentialTypes) {
+    jqUnit.assertDeepEq("The client credentials being used are expected", expectedClientCredentialTypes, clientCredentialTypes);
+};
+
+gpii.tests.untrusted.userLogonRequest.clientCredentialTypesTestDefs = [{
+    name: "GPII-3936: Prevent the security issue with using USB with NOVA client credential",
+    // expect: 2,
+    members: {
+        trackedClientCredentialTypes: []
+    },
+    distributeOptions: {
+        "test.localClientCredentialDataSource": {
+            record: "gpii.tests.untrusted.userLogonRequest.localClientCredentialDataSource",
+            target: "{that gpii.flowManager.local localClientCredentialDataSource}.type"
+        },
+        "test.securedClientCredentialDataSource": {
+            record: "gpii.tests.untrusted.userLogonRequest.securedClientCredentialDataSource",
+            target: "{that gpii.flowManager.local securedClientCredentialDataSource}.type"
+        }
+    },
+    newPreferences: {
+        "flat": {
+            "contexts": {
+                "gpii-default": {
+                    "name": "Default preferences",
+                    "preferences": {
+                        "http://registry.gpii.net/common/cursorSize": 1,
+                        "http://registry\\.gpii\\.net/common/magnification": 3
+                    }
+                }
+            }
+        }
+    },
+    sequence: [
+        {
+            // standard login
+            task: "{lifecycleManager}.performLogin",
+            args: [gpii.tests.userLogonRequest.gpiiKey, {
+                clientCredentialType: "secured"
+            }],
+            resolve: "gpii.tests.userLogonRequest.testLoginResponse",
+            resolveArgs: ["{arguments}.0", gpii.tests.userLogonRequest.gpiiKey]
+        }, {
+            func: "gpii.tests.userLogonRequest.verifyUsedClientCredentialType",
+            args: ["{testCaseHolder}.trackedClientCredentialTypes", ["secured"]]
+        }, {
+            func: "jqUnit.assertEquals",
+            args: ["The client credential type is tracked by the lifecycleManager user session model", "secured", "{lifecycleManager}.userSession.model.clientCredentialType"]
+        // }, {
+        //     func: "{flowManager}.savePreferences",
+        //     args: [gpii.tests.userLogonRequest.gpiiKey, "{that}.options.newPreferences", "secured"]
+        }
+    ]
 }];
 
 // Tests for general user logon request tests
@@ -137,3 +223,6 @@ gpii.test.runCouchTestDefs(gpii.tests.untrusted.userLogonRequest.buildTestDefs(g
 
 // Tests for key in and key out processes for nonexistent GPII keys
 gpii.test.runCouchTestDefs(gpii.tests.userLogonRequest.buildTestDefs(gpii.tests.untrusted.userLogonRequest.nonexistentKeyInTestDefs, "untrusted"));
+
+// Tests for fixing the security issue with using USB with NOVA client credential
+gpii.test.runCouchTestDefs(gpii.tests.userLogonRequest.buildTestDefs(gpii.tests.untrusted.userLogonRequest.clientCredentialTypesTestDefs, "untrusted"));
