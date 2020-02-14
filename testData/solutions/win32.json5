@@ -6806,19 +6806,6 @@
                             "description": "Changes the time system notifications are displayed",
                             "type": "object",
                             properties: {
-                                "path": {
-                                    oneOf: [
-                                        { "type":  "string"},
-                                        {
-                                            "type":  "object",
-                                            "properties": {
-                                                "get": { "type":  "string", "required": true },
-                                                "set": { "type":  "string", "required": true }
-                                            }
-                                        }
-                                    ],
-                                    "required": true
-                                },
                                 "value": {
                                     "type": "number",
                                     "default": 5,
@@ -7082,19 +7069,6 @@
                             "description": "Displays a underline showing which is the shortcut to active a menu item",
                             "type": "object",
                             "properties": {
-                                "path": {
-                                    oneOf: [
-                                        { "type":  "string"},
-                                        {
-                                            "type":  "object",
-                                            "properties": {
-                                                "get": { "type":  "string", "required": true },
-                                                "set": { "type":  "string", "required": true }
-                                            }
-                                        }
-                                    ],
-                                    "required": true
-                                },
                                 "value": {
                                     "type": "boolean",
                                     "default": false
@@ -7773,19 +7747,6 @@
                             "description": "Swap mouse left/right buttons",
                             // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                             "properties": {
-                                "path": {
-                                    oneOf: [
-                                        { "type":  "string"},
-                                        {
-                                            "type":  "object",
-                                            "properties": {
-                                                "get": { "type":  "string", "required": true },
-                                                "set": { "type":  "string", "required": true }
-                                            }
-                                        }
-                                    ],
-                                    "required": true
-                                },
                                 // This one is already in use in the QSS and can't be booleanised yet.
                                 "value": {
                                     "required": true,

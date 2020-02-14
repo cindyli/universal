@@ -164,23 +164,42 @@ gpii.tests.cloud.oauth2.settingsGet.testData = {
                 },
                 "supportedSettings": {
                     "StickyKeysOn": {
-                        schema: {
+                        "schema": {
                             "title": "Sticky Keys On",
                             "description": "Whether or not sticky keys should be turned on.",
                             "properties": {
-                                "path": { "type":  "string", "required":  true},
-                                "value": { "type":  "boolean", "required":  true}
+                                "path": {
+                                    "oneOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "get": {
+                                                    "type": "string",
+                                                    "required": true
+                                                },
+                                                "set": {
+                                                    "type": "string",
+                                                    "required": true
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                },
+                                "value": {
+                                    "type": "boolean",
+                                    "required": true
+                                }
                             }
                         }
                     }
                 },
                 "capabilitiesTransformations": {
                     "StickyKeysOn": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/common/stickyKeys",
-                            "outputPath": "value"
-                        },
+                        "value": "http://registry\\.gpii\\.net/common/stickyKeys",
                         "path": {
                             "literalValue": "pvParam.dwFlags.SKF_STICKYKEYSON"
                         }
@@ -206,11 +225,24 @@ gpii.tests.cloud.oauth2.settingsGet.testData = {
                 },
                 "supportedSettings": {
                     "StickyKeysOn": {
+                        // TODO: Make a general pattern for SPI settings.
                         schema: {
                             "title": "Sticky Keys On",
                             "description": "Whether or not sticky keys should be turned on.",
                             "properties": {
-                                "path": { "type":  "string", "required":  true},
+                                "path": {
+                                    oneOf: [
+                                        { "type":  "string"},
+                                        {
+                                            "type":  "object",
+                                            "properties": {
+                                                "get": { "type":  "string", "required": true },
+                                                "set": { "type":  "string", "required": true }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                },
                                 "value": { "type":  "boolean", "required":  true}
                             }
                         },
@@ -219,11 +251,7 @@ gpii.tests.cloud.oauth2.settingsGet.testData = {
                 },
                 "capabilitiesTransformations": {
                     "StickyKeysOn": {
-                        "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/common/stickyKeys",
-                            "outputPath": "value"
-                        }
+                        "value": "http://registry\\.gpii\\.net/common/stickyKeys"
                     }
                 },
                 "inverseCapabilitiesTransformations": {
