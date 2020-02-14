@@ -4780,19 +4780,6 @@
                             "description": "Set the screen brightness.",
                             "type": "object",
                             "properties": {
-                                "path": {
-                                    oneOf: [
-                                        { "type":  "string"},
-                                        {
-                                            "type":  "object",
-                                            "properties": {
-                                                "get": { "type":  "string", "required": true },
-                                                "set": { "type":  "string", "required": true }
-                                            }
-                                        }
-                                    ],
-                                    "required": true
-                                },
                                 "value": {
                                     "type": "number",
                                     "default": 0,
@@ -4985,7 +4972,6 @@
                             "description": "The path to the image to be set as the new desktop wallpaper.",
                             // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                             "properties": {
-                                "path": { "type":  "string"},
                                 "value": {
                                     "type": "string",
                                     "default": "%SystemRoot%\\Web\\Wallpaper\\Windows\\img0.jpg"
@@ -5042,7 +5028,6 @@
                             "description": "The path to the image to be set as the new desktop wallpaper.",
                             // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                             "properties": {
-                                "path": { "type":  "string", "required": true},
                                 "value": {
                                     "type": "string",
                                     "required": true,
@@ -6306,7 +6291,6 @@
                             "description": "Enable/Disable filter keys",
                             // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                             "properties": {
-                                "path": { "type":  "string", "required": true},
                                 "value": {
                                     "required": true,
                                     "type": "boolean",
@@ -6322,7 +6306,6 @@
                             "description": "Slow keys interval time in milliseconds",
                             // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                             "properties": {
-                                "path": { "type":  "string", "required": true},
                                 "value": {
                                     "required": true,
                                     "type": "integer",
@@ -6511,7 +6494,6 @@
                             "description": "Whether to enable/disable High Contrast",
                             // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                             "properties": {
-                                "path": { "type":  "string", "required": true},
                                 "value": {
                                     "required": true,
                                     "type": "boolean",
@@ -6732,19 +6714,6 @@
                             "description": "Hear descriptions of what's happening in videos",
                             "type": "object",
                             "properties": {
-                                "path": {
-                                    oneOf: [
-                                        { "type":  "string"},
-                                        {
-                                            "type":  "object",
-                                            "properties": {
-                                                "get": { "type":  "string", "required": true },
-                                                "set": { "type":  "string", "required": true }
-                                            }
-                                        }
-                                    ],
-                                    "required": true
-                                },
                                 "value": {
                                     "default": 0,
                                     "enum": [
@@ -7001,19 +6970,6 @@
                             "description": "Enable/Disable ToggleKeys feature",
                             "type": "object",
                             "properties": {
-                                "path": {
-                                    oneOf: [
-                                        { "type":  "string"},
-                                        {
-                                            "type":  "object",
-                                            "properties": {
-                                                "get": { "type":  "string", "required": true },
-                                                "set": { "type":  "string", "required": true }
-                                            }
-                                        }
-                                    ],
-                                    "required": true
-                                },
                                 "value": {
                                     "type": "boolean",
                                     "default": false,
@@ -7105,19 +7061,6 @@
                             "description": "Set the keyboard as the preferred input method",
                             "type": "object",
                             "properties": {
-                                "path": {
-                                    oneOf: [
-                                        { "type":  "string"},
-                                        {
-                                            "type":  "object",
-                                            "properties": {
-                                                "get": { "type":  "string", "required": true },
-                                                "set": { "type":  "string", "required": true }
-                                            }
-                                        }
-                                    ],
-                                    "required": true
-                                },
                                 "value": {
                                     "type": "boolean",
                                     "default": false
@@ -7624,7 +7567,6 @@
                             "description": "Enable/Disable mouse keys",
                             // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                             "properties": {
-                                "path": { "type":  "string", "required": true},
                                 "value": {
                                     "required": true,
                                     "type": "boolean",
@@ -7790,19 +7732,6 @@
                             "description": "Changes the number of lines to scroll when moving the scrollwheel.",
                             // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                             "properties": {
-                                "path": {
-                                    oneOf: [
-                                        { "type":  "string"},
-                                        {
-                                            "type":  "object",
-                                            "properties": {
-                                                "get": { "type":  "string", "required": true },
-                                                "set": { "type":  "string", "required": true }
-                                            }
-                                        }
-                                    ],
-                                    "required": true
-                                },
                                 "value": {
                                     "required": true,
                                     "default": 3,
@@ -7856,19 +7785,6 @@
                             "description": "Changes the way mouse scrolling is passed to applications.",
                             // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                             "properties": {
-                                "path": {
-                                    oneOf: [
-                                        { "type":  "string"},
-                                        {
-                                            "type":  "object",
-                                            "properties": {
-                                                "get": { "type":  "string", "required": true },
-                                                "set": { "type":  "string", "required": true }
-                                            }
-                                        }
-                                    ],
-                                    "required": true
-                                },
                                 "value": {
                                     "required": true,
                                     "enum": [0, 1],
@@ -7907,19 +7823,6 @@
                             "description": "Enables or disables mouse cursor shadow.",
                             // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                             "properties": {
-                                "path": {
-                                    oneOf: [
-                                        { "type":  "string"},
-                                        {
-                                            "type":  "object",
-                                            "properties": {
-                                                "get": { "type":  "string", "required": true },
-                                                "set": { "type":  "string", "required": true }
-                                            }
-                                        }
-                                    ],
-                                    "required": true
-                                },
                                 "value": {
                                     "required": true,
                                     "type": "boolean",
@@ -7958,19 +7861,6 @@
                             "description": "Changes the number of chars that are scrolled horizontally.",
                             // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                             "properties": {
-                                "path": {
-                                    oneOf: [
-                                        { "type":  "string"},
-                                        {
-                                            "type":  "object",
-                                            "properties": {
-                                                "get": { "type":  "string", "required": true },
-                                                "set": { "type":  "string", "required": true }
-                                            }
-                                        }
-                                    ],
-                                    "required": true
-                                },
                                 "value": {
                                     "required": true,
                                     "type": "integer",
@@ -8014,19 +7904,6 @@
                             "description": "Windows are focused when mouse is stopped over them.",
                             // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                             "properties": {
-                                "path": {
-                                    oneOf: [
-                                        { "type":  "string"},
-                                        {
-                                            "type":  "object",
-                                            "properties": {
-                                                "get": { "type":  "string", "required": true },
-                                                "set": { "type":  "string", "required": true }
-                                            }
-                                        }
-                                    ],
-                                    "required": true
-                                },
                                 "value": {
                                     "required": true,
                                     "type": "boolean",
@@ -8065,19 +7942,6 @@
                             "description": "Windows receive focus when mouse hovers over them.",
                             // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                             "properties": {
-                                "path": {
-                                    oneOf: [
-                                        { "type":  "string"},
-                                        {
-                                            "type":  "object",
-                                            "properties": {
-                                                "get": { "type":  "string", "required": true },
-                                                "set": { "type":  "string", "required": true }
-                                            }
-                                        }
-                                    ],
-                                    "required": true
-                                },
                                 "value": {
                                     "required": true,
                                     "type": "boolean",
@@ -8116,19 +7980,6 @@
                             "description": "Enable/Disables the automatic Windows arrangment when dragging windows to border with mouse.",
                             // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                             "properties": {
-                                "path": {
-                                    oneOf: [
-                                        { "type":  "string"},
-                                        {
-                                            "type":  "object",
-                                            "properties": {
-                                                "get": { "type":  "string", "required": true },
-                                                "set": { "type":  "string", "required": true }
-                                            }
-                                        }
-                                    ],
-                                    "required": true
-                                },
                                 "value": {
                                     "required": true,
                                     "type": "boolean",
@@ -8197,19 +8048,6 @@
                             "description": "Selects a pointer speed.",
                             // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                             "properties": {
-                                "path": {
-                                    oneOf: [
-                                        { "type":  "string"},
-                                        {
-                                            "type":  "object",
-                                            "properties": {
-                                                "get": { "type":  "string", "required": true },
-                                                "set": { "type":  "string", "required": true }
-                                            }
-                                        }
-                                    ],
-                                    "required": true
-                                },
                                 "value": {
                                     "required": true,
                                     "type": "integer",
@@ -8252,19 +8090,6 @@
                             "description": "Enable/Disables enhanced pointer precision.",
                             // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                             "properties": {
-                                "path": {
-                                    oneOf: [
-                                        { "type":  "string"},
-                                        {
-                                            "type":  "object",
-                                            "properties": {
-                                                "get": { "type":  "string", "required": true },
-                                                "set": { "type":  "string", "required": true }
-                                            }
-                                        }
-                                    ],
-                                    "required": true
-                                },
                                 "value": {
                                     "required": true,
                                     "type": "boolean",
@@ -8311,19 +8136,6 @@
                             "description": "Automatically move pointer to the default button in a dialogue.",
                             // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                             "properties": {
-                                "path": {
-                                    oneOf: [
-                                        { "type":  "string"},
-                                        {
-                                            "type":  "object",
-                                            "properties": {
-                                                "get": { "type":  "string", "required": true },
-                                                "set": { "type":  "string", "required": true }
-                                            }
-                                        }
-                                    ],
-                                    "required": true
-                                },
                                 "value": {
                                     "required": true,
                                     "type": "boolean",
@@ -8365,19 +8177,6 @@
                             "description": "Enable/Disables hiding the pointer while typing.",
                             // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                             "properties": {
-                                "path": {
-                                    oneOf: [
-                                        { "type":  "string"},
-                                        {
-                                            "type":  "object",
-                                            "properties": {
-                                                "get": { "type":  "string", "required": true },
-                                                "set": { "type":  "string", "required": true }
-                                            }
-                                        }
-                                    ],
-                                    "required": true
-                                },
                                 "value": {
                                     "required": true,
                                     "type": "boolean",
@@ -8416,19 +8215,6 @@
                             "description": "Enable/Disable showing mouse location when pressing the CTRL key.",
                             // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                             "properties": {
-                                "path": {
-                                    oneOf: [
-                                        { "type":  "string"},
-                                        {
-                                            "type":  "object",
-                                            "properties": {
-                                                "get": { "type":  "string", "required": true },
-                                                "set": { "type":  "string", "required": true }
-                                            }
-                                        }
-                                    ],
-                                    "required": true
-                                },
                                 "value": {
                                     "required": true,
                                     "type": "boolean",
@@ -8543,19 +8329,6 @@
                             "description": "Amount of mouse trailing",
                             // TODO: Discuss somehow simplifying the structure of SPI settings for easier UI input.
                             "properties": {
-                                "path": {
-                                    oneOf: [
-                                        { "type":  "string"},
-                                        {
-                                            "type":  "object",
-                                            "properties": {
-                                                "get": { "type":  "string", "required": true },
-                                                "set": { "type":  "string", "required": true }
-                                            }
-                                        }
-                                    ],
-                                    "required": true
-                                },
                                 "value": {
                                     "required": true,
                                     "type": "integer",
@@ -9626,19 +9399,6 @@
                             "title": "Sticky Keys On",
                             "description": "Whether or not sticky keys should be turned on.",
                             "properties": {
-                                "path": {
-                                    oneOf: [
-                                        { "type":  "string"},
-                                        {
-                                            "type":  "object",
-                                            "properties": {
-                                                "get": { "type":  "string", "required": true },
-                                                "set": { "type":  "string", "required": true }
-                                            }
-                                        }
-                                    ],
-                                    "required": true
-                                },
                                 "value": { "type":  "boolean", "required":  true}
                             }
                         },

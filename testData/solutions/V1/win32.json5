@@ -5025,27 +5025,6 @@
                             "description": "Set the screen brightness.",
                             "type": "object",
                             "properties": {
-                                "path": {
-                                    "oneOf": [
-                                        {
-                                            "type": "string"
-                                        },
-                                        {
-                                            "type": "object",
-                                            "properties": {
-                                                "get": {
-                                                    "type": "string",
-                                                    "required": true
-                                                },
-                                                "set": {
-                                                    "type": "string",
-                                                    "required": true
-                                                }
-                                            }
-                                        }
-                                    ],
-                                    "required": true
-                                },
                                 "value": {
                                     "type": "number",
                                     "default": 0,
@@ -5237,12 +5216,30 @@
                             "title": "Desktop background wallpaper",
                             "description": "The path to the image to be set as the new desktop wallpaper.",
                             "properties": {
-                                "path": {
-                                    "type": "string"
-                                },
                                 "value": {
                                     "type": "string",
                                     "default": "%SystemRoot%\\Web\\Wallpaper\\Windows\\img0.jpg"
+                                },
+                                "path": {
+                                    "oneOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "get": {
+                                                    "type": "string",
+                                                    "required": true
+                                                },
+                                                "set": {
+                                                    "type": "string",
+                                                    "required": true
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
                                 }
                             }
                         }
@@ -5297,14 +5294,31 @@
                             "title": "Desktop background wallpaper",
                             "description": "The path to the image to be set as the new desktop wallpaper.",
                             "properties": {
-                                "path": {
-                                    "type": "string",
-                                    "required": true
-                                },
                                 "value": {
                                     "type": "string",
                                     "required": true,
                                     "default": ""
+                                },
+                                "path": {
+                                    "oneOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "get": {
+                                                    "type": "string",
+                                                    "required": true
+                                                },
+                                                "set": {
+                                                    "type": "string",
+                                                    "required": true
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
                                 }
                             }
                         }
@@ -6597,14 +6611,31 @@
                             "title": "Filter keys",
                             "description": "Enable/Disable filter keys",
                             "properties": {
-                                "path": {
-                                    "type": "string",
-                                    "required": true
-                                },
                                 "value": {
                                     "required": true,
                                     "type": "boolean",
                                     "default": false
+                                },
+                                "path": {
+                                    "oneOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "get": {
+                                                    "type": "string",
+                                                    "required": true
+                                                },
+                                                "set": {
+                                                    "type": "string",
+                                                    "required": true
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
                                 }
                             }
                         }
@@ -6614,14 +6645,31 @@
                             "title": "Slow keys interval",
                             "description": "Slow keys interval time in milliseconds",
                             "properties": {
-                                "path": {
-                                    "type": "string",
-                                    "required": true
-                                },
                                 "value": {
                                     "required": true,
                                     "type": "integer",
                                     "default": 0
+                                },
+                                "path": {
+                                    "oneOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "get": {
+                                                    "type": "string",
+                                                    "required": true
+                                                },
+                                                "set": {
+                                                    "type": "string",
+                                                    "required": true
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
                                 }
                             }
                         }
@@ -6631,7 +6679,30 @@
                             "title": "Bounce keys interval",
                             "description": "Bounce keys interval time in milliseconds",
                             "type": "integer",
-                            "default": 0
+                            "default": 0,
+                            "properties": {
+                                "path": {
+                                    "oneOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "get": {
+                                                    "type": "string",
+                                                    "required": true
+                                                },
+                                                "set": {
+                                                    "type": "string",
+                                                    "required": true
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                }
+                            }
                         }
                     }
                 },
@@ -6812,14 +6883,31 @@
                             "title": "High Contrast",
                             "description": "Whether to enable/disable High Contrast",
                             "properties": {
-                                "path": {
-                                    "type": "string",
-                                    "required": true
-                                },
                                 "value": {
                                     "required": true,
                                     "type": "boolean",
                                     "default": false
+                                },
+                                "path": {
+                                    "oneOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "get": {
+                                                    "type": "string",
+                                                    "required": true
+                                                },
+                                                "set": {
+                                                    "type": "string",
+                                                    "required": true
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
                                 }
                             }
                         }
@@ -7028,6 +7116,17 @@
                             "description": "Hear descriptions of what's happening in videos",
                             "type": "object",
                             "properties": {
+                                "value": {
+                                    "default": 0,
+                                    "enum": [
+                                        0,
+                                        1
+                                    ],
+                                    "enumLabels": [
+                                        "off",
+                                        "on"
+                                    ]
+                                },
                                 "path": {
                                     "oneOf": [
                                         {
@@ -7048,17 +7147,6 @@
                                         }
                                     ],
                                     "required": true
-                                },
-                                "value": {
-                                    "default": 0,
-                                    "enum": [
-                                        0,
-                                        1
-                                    ],
-                                    "enumLabels": [
-                                        "off",
-                                        "on"
-                                    ]
                                 }
                             }
                         }
@@ -7131,6 +7219,27 @@
                                         "60s",
                                         "300s"
                                     ]
+                                },
+                                "path": {
+                                    "oneOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "get": {
+                                                    "type": "string",
+                                                    "required": true
+                                                },
+                                                "set": {
+                                                    "type": "string",
+                                                    "required": true
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
                                 }
                             }
                         }
@@ -7313,6 +7422,11 @@
                             "description": "Enable/Disable ToggleKeys feature",
                             "type": "object",
                             "properties": {
+                                "value": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "required": true
+                                },
                                 "path": {
                                     "oneOf": [
                                         {
@@ -7332,11 +7446,6 @@
                                             }
                                         }
                                     ],
-                                    "required": true
-                                },
-                                "value": {
-                                    "type": "boolean",
-                                    "default": false,
                                     "required": true
                                 }
                             }
@@ -7394,6 +7503,27 @@
                                 "value": {
                                     "type": "boolean",
                                     "default": false
+                                },
+                                "path": {
+                                    "oneOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "get": {
+                                                    "type": "string",
+                                                    "required": true
+                                                },
+                                                "set": {
+                                                    "type": "string",
+                                                    "required": true
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
                                 }
                             }
                         }
@@ -7429,6 +7559,10 @@
                             "description": "Set the keyboard as the preferred input method",
                             "type": "object",
                             "properties": {
+                                "value": {
+                                    "type": "boolean",
+                                    "default": false
+                                },
                                 "path": {
                                     "oneOf": [
                                         {
@@ -7449,10 +7583,6 @@
                                         }
                                     ],
                                     "required": true
-                                },
-                                "value": {
-                                    "type": "boolean",
-                                    "default": false
                                 }
                             }
                         }
@@ -8005,14 +8135,31 @@
                             "title": "Mouse keys",
                             "description": "Enable/Disable mouse keys",
                             "properties": {
-                                "path": {
-                                    "type": "string",
-                                    "required": true
-                                },
                                 "value": {
                                     "required": true,
                                     "type": "boolean",
                                     "default": false
+                                },
+                                "path": {
+                                    "oneOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "get": {
+                                                    "type": "string",
+                                                    "required": true
+                                                },
+                                                "set": {
+                                                    "type": "string",
+                                                    "required": true
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
                                 }
                             }
                         }
@@ -8022,7 +8169,30 @@
                             "title": "Mouse keys speed",
                             "description": "Speed of mouse keys",
                             "type": "number",
-                            "multipleOf": 10
+                            "multipleOf": 10,
+                            "properties": {
+                                "path": {
+                                    "oneOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "get": {
+                                                    "type": "string",
+                                                    "required": true
+                                                },
+                                                "set": {
+                                                    "type": "string",
+                                                    "required": true
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                }
+                            }
                         }
                     },
                     "Acceleration": {
@@ -8031,7 +8201,30 @@
                             "description": "Acceleration of mouse keys",
                             "type": "number",
                             "minimum": -1000,
-                            "maximum": 1000
+                            "maximum": 1000,
+                            "properties": {
+                                "path": {
+                                    "oneOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "get": {
+                                                    "type": "string",
+                                                    "required": true
+                                                },
+                                                "set": {
+                                                    "type": "string",
+                                                    "required": true
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
+                                }
+                            }
                         }
                     }
                 },
@@ -8146,6 +8339,27 @@
                                         "On"
                                     ],
                                     "default": 0
+                                },
+                                "path": {
+                                    "oneOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "get": {
+                                                    "type": "string",
+                                                    "required": true
+                                                },
+                                                "set": {
+                                                    "type": "string",
+                                                    "required": true
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
                                 }
                             }
                         }
@@ -8184,27 +8398,6 @@
                             "title": "Mouse scroll wheel mode",
                             "description": "Changes the number of lines to scroll when moving the scrollwheel.",
                             "properties": {
-                                "path": {
-                                    "oneOf": [
-                                        {
-                                            "type": "string"
-                                        },
-                                        {
-                                            "type": "object",
-                                            "properties": {
-                                                "get": {
-                                                    "type": "string",
-                                                    "required": true
-                                                },
-                                                "set": {
-                                                    "type": "string",
-                                                    "required": true
-                                                }
-                                            }
-                                        }
-                                    ],
-                                    "required": true
-                                },
                                 "value": {
                                     "required": true,
                                     "default": 3,
@@ -8225,6 +8418,27 @@
                                             ]
                                         }
                                     ]
+                                },
+                                "path": {
+                                    "oneOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "get": {
+                                                    "type": "string",
+                                                    "required": true
+                                                },
+                                                "set": {
+                                                    "type": "string",
+                                                    "required": true
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "required": true
                                 }
                             }
                         }
@@ -8263,6 +8477,17 @@
                             "title": "Mouse scroll focus routing",
                             "description": "Changes the way mouse scrolling is passed to applications.",
                             "properties": {
+                                "value": {
+                                    "required": true,
+                                    "enum": [
+                                        0,
+                                        1
+                                    ],
+                                    "enumLabels": [
+                                        "RoutingFocus",
+                                        "RoutingHybrid"
+                                    ]
+                                },
                                 "path": {
                                     "oneOf": [
                                         {
@@ -8283,17 +8508,6 @@
                                         }
                                     ],
                                     "required": true
-                                },
-                                "value": {
-                                    "required": true,
-                                    "enum": [
-                                        0,
-                                        1
-                                    ],
-                                    "enumLabels": [
-                                        "RoutingFocus",
-                                        "RoutingHybrid"
-                                    ]
                                 }
                             }
                         }
@@ -8329,6 +8543,11 @@
                             "title": "Mouse cursor shadow",
                             "description": "Enables or disables mouse cursor shadow.",
                             "properties": {
+                                "value": {
+                                    "required": true,
+                                    "type": "boolean",
+                                    "default": false
+                                },
                                 "path": {
                                     "oneOf": [
                                         {
@@ -8349,11 +8568,6 @@
                                         }
                                     ],
                                     "required": true
-                                },
-                                "value": {
-                                    "required": true,
-                                    "type": "boolean",
-                                    "default": false
                                 }
                             }
                         }
@@ -8389,6 +8603,13 @@
                             "title": "Mouse wheel horizontal scroll",
                             "description": "Changes the number of chars that are scrolled horizontally.",
                             "properties": {
+                                "value": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "default": 3,
+                                    "minimum": 1,
+                                    "maximum": 100
+                                },
                                 "path": {
                                     "oneOf": [
                                         {
@@ -8409,13 +8630,6 @@
                                         }
                                     ],
                                     "required": true
-                                },
-                                "value": {
-                                    "required": true,
-                                    "type": "integer",
-                                    "default": 3,
-                                    "minimum": 1,
-                                    "maximum": 100
                                 }
                             }
                         }
@@ -8454,6 +8668,11 @@
                             "title": "Mouse Windows tracking",
                             "description": "Windows are focused when mouse is stopped over them.",
                             "properties": {
+                                "value": {
+                                    "required": true,
+                                    "type": "boolean",
+                                    "default": false
+                                },
                                 "path": {
                                     "oneOf": [
                                         {
@@ -8474,11 +8693,6 @@
                                         }
                                     ],
                                     "required": true
-                                },
-                                "value": {
-                                    "required": true,
-                                    "type": "boolean",
-                                    "default": false
                                 }
                             }
                         }
@@ -8514,6 +8728,11 @@
                             "title": "Windows Tracking",
                             "description": "Windows receive focus when mouse hovers over them.",
                             "properties": {
+                                "value": {
+                                    "required": true,
+                                    "type": "boolean",
+                                    "default": false
+                                },
                                 "path": {
                                     "oneOf": [
                                         {
@@ -8534,11 +8753,6 @@
                                         }
                                     ],
                                     "required": true
-                                },
-                                "value": {
-                                    "required": true,
-                                    "type": "boolean",
-                                    "default": false
                                 }
                             }
                         }
@@ -8574,6 +8788,11 @@
                             "title": "Configures Window arrangement",
                             "description": "Enable/Disables the automatic Windows arrangment when dragging windows to border with mouse.",
                             "properties": {
+                                "value": {
+                                    "required": true,
+                                    "type": "boolean",
+                                    "default": true
+                                },
                                 "path": {
                                     "oneOf": [
                                         {
@@ -8594,11 +8813,6 @@
                                         }
                                     ],
                                     "required": true
-                                },
-                                "value": {
-                                    "required": true,
-                                    "type": "boolean",
-                                    "default": true
                                 }
                             }
                         }
@@ -8664,6 +8878,13 @@
                             "title": "Configures pointer speed",
                             "description": "Selects a pointer speed.",
                             "properties": {
+                                "value": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 20,
+                                    "default": 10
+                                },
                                 "path": {
                                     "oneOf": [
                                         {
@@ -8684,13 +8905,6 @@
                                         }
                                     ],
                                     "required": true
-                                },
-                                "value": {
-                                    "required": true,
-                                    "type": "integer",
-                                    "minimum": 1,
-                                    "maximum": 20,
-                                    "default": 10
                                 }
                             }
                         }
@@ -8728,6 +8942,11 @@
                             "title": "Enhance pointer precision",
                             "description": "Enable/Disables enhanced pointer precision.",
                             "properties": {
+                                "value": {
+                                    "required": true,
+                                    "type": "boolean",
+                                    "default": true
+                                },
                                 "path": {
                                     "oneOf": [
                                         {
@@ -8748,11 +8967,6 @@
                                         }
                                     ],
                                     "required": true
-                                },
-                                "value": {
-                                    "required": true,
-                                    "type": "boolean",
-                                    "default": true
                                 }
                             }
                         }
@@ -8804,6 +9018,11 @@
                             "title": "Snap To",
                             "description": "Automatically move pointer to the default button in a dialogue.",
                             "properties": {
+                                "value": {
+                                    "required": true,
+                                    "type": "boolean",
+                                    "default": false
+                                },
                                 "path": {
                                     "oneOf": [
                                         {
@@ -8824,11 +9043,6 @@
                                         }
                                     ],
                                     "required": true
-                                },
-                                "value": {
-                                    "required": true,
-                                    "type": "boolean",
-                                    "default": false
                                 }
                             }
                         }
@@ -8867,6 +9081,11 @@
                             "title": "Hide pointer while typing",
                             "description": "Enable/Disables hiding the pointer while typing.",
                             "properties": {
+                                "value": {
+                                    "required": true,
+                                    "type": "boolean",
+                                    "default": true
+                                },
                                 "path": {
                                     "oneOf": [
                                         {
@@ -8887,11 +9106,6 @@
                                         }
                                     ],
                                     "required": true
-                                },
-                                "value": {
-                                    "required": true,
-                                    "type": "boolean",
-                                    "default": true
                                 }
                             }
                         }
@@ -8927,6 +9141,11 @@
                             "title": "Mouse sonar",
                             "description": "Enable/Disable showing mouse location when pressing the CTRL key.",
                             "properties": {
+                                "value": {
+                                    "required": true,
+                                    "type": "boolean",
+                                    "default": false
+                                },
                                 "path": {
                                     "oneOf": [
                                         {
@@ -8947,11 +9166,6 @@
                                         }
                                     ],
                                     "required": true
-                                },
-                                "value": {
-                                    "required": true,
-                                    "type": "boolean",
-                                    "default": false
                                 }
                             }
                         }
@@ -9060,6 +9274,12 @@
                             "title": "Mouse trails",
                             "description": "Amount of mouse trailing",
                             "properties": {
+                                "value": {
+                                    "required": true,
+                                    "type": "integer",
+                                    "minimum": 0,
+                                    "maximum": 10
+                                },
                                 "path": {
                                     "oneOf": [
                                         {
@@ -9080,12 +9300,6 @@
                                         }
                                     ],
                                     "required": true
-                                },
-                                "value": {
-                                    "required": true,
-                                    "type": "integer",
-                                    "minimum": 0,
-                                    "maximum": 10
                                 }
                             }
                         }
@@ -10324,6 +10538,10 @@
                             "title": "Sticky Keys On",
                             "description": "Whether or not sticky keys should be turned on.",
                             "properties": {
+                                "value": {
+                                    "type": "boolean",
+                                    "required": true
+                                },
                                 "path": {
                                     "oneOf": [
                                         {
@@ -10343,10 +10561,6 @@
                                             }
                                         }
                                     ],
-                                    "required": true
-                                },
-                                "value": {
-                                    "type": "boolean",
                                     "required": true
                                 }
                             }
