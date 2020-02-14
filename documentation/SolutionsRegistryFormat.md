@@ -1,6 +1,18 @@
-# Solutions Registry format
+# Solutions Registry
 
-## Overall format:
+Solutoin Registry files can be found at testData/solutions/ directory. They include:
+
+1. Solution Registry JSON5 files for various OS;
+2. metadata.json5: indicates the version of each Solution Registry. Solution Registry version starts from 1.
+ The change to a Solution Registry that requires the code change to Untrusted Local Flow Manager will move
+ this Solution Registry to a higher version;
+3. Subdirectories for historical Solution Registry format: contain replicas of the most recent Solution Registry
+ transformed into all historical formats. For example, "/V1" subdirectory contains version 1 of Solution Registry
+ whose most recent version is higher than 1.
+
+## Format
+
+### Overall format:
 
 Each entry in the solution registry should have a unique ID (`Solution.id` in the below example), as well as a name
 (`name`), and a description of which context it requires to run (`context`). Besides these, information can be provided
@@ -31,7 +43,7 @@ structure and allowed keys in a solution description can be seen here.
 }
 ```
 
-## contexts
+### contexts
 
 The `contexts` block describes what the required context is for the solution to run. Currently only one type of context
 is supported, namely `OS`. The context block is **mandatory**.
@@ -48,7 +60,7 @@ is supported, namely `OS`. The context block is **mandatory**.
 }
 ```
 
-## settingsHandlers
+### settingsHandlers
 
 The `settingsHandlers` block is unique and one of the most important blocks in the solutions registry entry. It consists
 of zero or more settingsHandler entries, each keyed by an arbitrary name (that is unique within this solutions
@@ -142,7 +154,7 @@ Each settingsHandler block can contain the following information:
   * If a `supportedSettings` option is supplied, only those settings listed there will be applied to the settingsHandler
   * If a solution registry entry has multiple settings handlers, the `supportedSettings` entry is mandatory for each settingshandler.
 
-## launchHandlers:
+### launchHandlers:
 
 The `launchHandlers` are very similar to the `settingsHandlers` block in both form, functionality and implementation,
 but have a different area of responsibility. As the name suggests, rather than being responsible for modifying settings,
@@ -198,7 +210,7 @@ that can be used in the lifecycle blocks to reference it.
 Each launch handler will have a `type` entry, describing its type, as well as an `options` block. The content of the
 `options` block will depend on the launch handler.
 
-## Capabilities
+### Capabilities
 
 While most of the users preferences for a certain application or group of applications are handled in the various
 `settingsHandlers` entries, there are some preferences that can affect the application in other ways than in its
@@ -232,12 +244,12 @@ For clarity, lets take two different solutions:
 ]
 ```
 
-## Lifecycle Blocks: configure, restore, start, stop, update and isRunning
+### Lifecycle Blocks: configure, restore, start, stop, update and isRunning
 
 Lifecycle blocks describe what should happen when the system needs to configure, start, update, etc., an application.
 Neither of these blocks are mandatory as the system will infer their content in case they are not specified.
 
-### configure and restore
+#### configure and restore
 
 These blocks describe how to configure and restore a solution, that is:
 
@@ -266,7 +278,7 @@ references to all the solutions settingshandlers (if any).
 ]
 ```
 
-### start, stop and isRunning
+#### start, stop and isRunning
 
 These blocks all have to do with the run-state of a solution. Their meanings are the following:
 
@@ -305,7 +317,7 @@ containing references to all launchHandlers specified for that solution (if any)
 ]
 ```
 
-### update
+#### update
 
 The `update` block works very similarly to the lifecycle blocks. It describes what should happen when the configuration
 needs to be updated (e.g. due to preferences set changes, PSP adjustments, etc).
@@ -340,7 +352,7 @@ will be `[ "stop", "configure", "start" ]`, i.e. a cycle of stopping, configurin
 settingsHandlers are "live", that means that it supports settings being updated live and a value of `[ "configure" ]` is
 inferred.
 
-### isInstalled:
+#### isInstalled:
 
 This directive is used to detect whether a solution is installed. If any of these blocks evaluate to `true` (implicit
 **OR**), the application is considered to be installed.
@@ -362,12 +374,12 @@ This directive is used to detect whether a solution is installed. If any of thes
 
 *****
 
-### UNIMPLEMENTED BLOCKS
+#### UNIMPLEMENTED BLOCKS
 
 There are several advanced options that we're not planning to implement in the short term, but which will make the
 implementation of things like the ORCA settings handler much less horrible.
 
-#### isConfigurable
+##### isConfigurable
 
 This is run before configuration to ensure that the application is actually ready to be configured. This is relevant for
 applications where e.g. a configuration file needs to be present, a tutorial needs to be run on the first launch, etc.
@@ -381,7 +393,7 @@ applications where e.g. a configuration file needs to be present, a tutorial nee
 }]
 ```
 
-#### makeConfigurable
+##### makeConfigurable
 
 Is the actions that need to be taken to make the application configurable (such as running a wizard, creating a default
 configuration file, adding a new system user, etc).
@@ -394,10 +406,37 @@ configuration file, adding a new system user, etc).
 }]
 ```
 
-#### install:
+##### install:
 
 Used for describing the steps required for installing the application
 
-#### uninstall:
+##### uninstall:
 
 Used for describing the steps required for uninstalling the application (i.e. completely removing it from the system)
+
+## Solutions Registry Version
+
+The Solutions Registry version starts from 1. Every Solution Registry change that requires the code change to
+Untrusted Local Flow Manager will move the corresponding Solution Registry to a higher version.
+
+### What to do when a Solutions Registry is bumped to a higher version
+
+Given an example that Solutions Registry for Windows platform is bumped from 2 to 3:
+
+1. Keep the most recent version of win32.json5 in testData/solutions/ directory;
+2. Modify testData/solutions/metadata.json5 to change the version for "win32" from 2 to 3;
+3. Define the transformation function that will transform Windows Solutions Registry from verion 3 to version 2
+ in gpii/node_modules/solutionsRegistry/src/js/transformSolutionVersions.js. The function name is in the format
+ of "gpii.solutionsRegistry.transform_{os}_{highVersionNumber}_{lowerVersionNumber}". In this case, the function
+ name will be "gpii.solutionsRegistry.transform_win32_3_2()";
+4. Write unit tests in gpii/node_modules/solutionsRegistry/src/test/TransformSolutionVersionsTests.js for the new
+ tranformation function "gpii.solutionsRegistry.transform_win32_3_2()";
+5. Run `build/transformSolutionRegistryVersions.js` to generate all historical formats for all Solution Registry
+ in subdirectories of "testData/solutions/". In this case, a new subdirectory "V2" will be created with a
+ win32.json5 in version 2;
+6. Push files created all above to the Github GPII/universal repository.
+
+## When There is a change to Solution Registry
+
+Run `build/transformSolutionRegistryVersions.js` to synchronize the change to historical formats in version
+subdirectories.

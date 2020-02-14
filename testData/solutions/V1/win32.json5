@@ -6591,8 +6591,7 @@
                                     "default": false
                                 }
                             }
-                        },
-                        "path": "pvParam.dwFlags.FKF_FILTERKEYSON"
+                        }
                     },
                     "SlowKeysInterval": {
                         "schema": {
@@ -6609,8 +6608,7 @@
                                     "default": 0
                                 }
                             }
-                        },
-                        "path": "pvParam.iWaitMSec"
+                        }
                     },
                     "BounceKeysInterval": {
                         "schema": {
@@ -6631,6 +6629,9 @@
                             "right": false,
                             "operator": "||",
                             "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": "pvParam.dwFlags.FKF_FILTERKEYSON"
                         }
                     },
                     "SlowKeysInterval": {
@@ -6646,6 +6647,9 @@
                             },
                             "false": 0,
                             "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": "pvParam.iWaitMSec"
                         }
                     },
                     "BounceKeysInterval": {
@@ -7919,8 +7923,7 @@
                                     "default": false
                                 }
                             }
-                        },
-                        "path": "pvParam.dwFlags.MKF_MOUSEKEYSON"
+                        }
                     },
                     "MaxSpeed": {
                         "schema": {
@@ -7928,8 +7931,7 @@
                             "description": "Speed of mouse keys",
                             "type": "number",
                             "multipleOf": 10
-                        },
-                        "path": "pvParam.iMaxSpeed"
+                        }
                     },
                     "Acceleration": {
                         "schema": {
@@ -7947,6 +7949,9 @@
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/common/mouseEmulation/enabled",
                             "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": "pvParam.dwFlags.MKF_MOUSEKEYSON"
                         }
                     },
                     "MaxSpeed": {
@@ -7961,6 +7966,9 @@
                                 }
                             },
                             "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": "pvParam.iMaxSpeed"
                         }
                     },
                     "Acceleration": {

@@ -6,3 +6,4 @@ exports.linux = require("./linux.json5");
 exports.darwin = require("./darwin.json5");
 exports.android = require("./android.json5");
 exports.web = require("./web.json5");
+exports.metadata = require("./metadata.json5");

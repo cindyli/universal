@@ -59,5 +59,10 @@
                 }
             ]
         }
+    },
+    "metadata": {
+        "win32": {
+            "encodingVersion": 1
+        }
     }
 }

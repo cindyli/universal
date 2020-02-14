@@ -20,48 +20,9 @@ var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
     jqUnit = fluid.registerNamespace("jqUnit");
 
-// These are test definitions for use with the cloud based flow manager in both
-// development and production configurations. The definitions are for getting
-// settings.
+fluid.registerNamespace("gpii.tests.cloud.oauth2.settingsGet");
 
-// Define extra requests used for testing GET /settings endpoint
-fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.requests", {
-    gradeNames: ["fluid.component"],
-    components: {
-        accessTokenRequest_settings: {
-            type: "kettle.test.request.http",
-            options: {
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                path: "/access_token",
-                method: "POST"
-            }
-        },
-        settingsRequest: {
-            type: "kettle.test.request.http",
-            options: {
-                path: "/%gpiiKey/settings/%device",
-                termMap: {
-                    gpiiKey: "{testCaseHolder}.options.gpiiKey",
-                    device: {
-                        expander: {
-                            func: "gpii.test.cloudBased.computeDevice",
-                            args: [
-                                [
-                                    "org.gnome.desktop.a11y.magnifier",
-                                    "org.gnome.desktop.interface",
-                                    "org.alsa-project"
-                                ],
-                                "linux"
-                            ]
-                        }
-                    }
-                }
-            }
-        }
-    }
-});
+require("./SettingsGetTestDefsUtils.js");
 
 // For successful workflows that request user settings from /settings endpoint
 // using access tokens granted by /access_token endpoint
@@ -89,12 +50,12 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.mainSequence", {
         },
         {
             funcName: "gpii.test.cloudBased.oauth2.sendRequestWithAccessToken",
-            args: ["{settingsRequest}", "{accessTokenRequest_settings}.access_token"]
+            args: ["{testCaseHolder}.options.settingsRequest", "{accessTokenRequest_settings}.access_token"]
         },
         {
-            event: "{settingsRequest}.events.onComplete",
+            event: "{testCaseHolder}.options.settingsRequest.events.onComplete",
             listener: "gpii.tests.cloud.oauth2.settingsGet.verifyPayloadMatchMakerOutput",
-            args: ["{arguments}.0", "{testCaseHolder}.options.expectedPreferences", "{testCaseHolder}.options.expectedMatchMakerOutput"]
+            args: ["{arguments}.0", "{testCaseHolder}.options.expectedPreferences", "{testCaseHolder}.options.expectedMatchMakerOutput", "{testCaseHolder}.options.solutionToVerify", "{testCaseHolder}.options.expectedSr"]
         }
     ]
 });
@@ -231,12 +192,12 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.settingsNoAccessTokenSequenc
     sequence: [
         { funcName: "fluid.log", args: ["Flowmanager rejected get settings sequence -- no access token..."]},
         {
-            func: "{settingsRequest}.send"
+            func: "{testCaseHolder}.options.settingsRequest.send"
         },
         {
-            event: "{settingsRequest}.events.onComplete",
+            event: "{testCaseHolder}.options.settingsRequest.events.onComplete",
             listener: "gpii.test.verifyStatusCodeResponse",
-            args: ["{arguments}.0", "{settingsRequest}", "{testCaseHolder}.options.expectedStatusCode"]
+            args: ["{arguments}.0", "{testCaseHolder}.options.settingsRequest", "{testCaseHolder}.options.expectedStatusCode"]
         }
     ]
 });
@@ -259,12 +220,12 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.settingsWrongAccessTokenSequ
         { funcName: "fluid.log", args: ["Flowmanager rejected get settings sequence -- wrong access token..."]},
         {
             funcName: "gpii.test.cloudBased.oauth2.sendRequestWithAccessToken",
-            args: ["{settingsRequest}", "a_wrong_access_token"]
+            args: ["{testCaseHolder}.options.settingsRequest", "a_wrong_access_token"]
         },
         {
-            event: "{settingsRequest}.events.onComplete",
+            event: "{testCaseHolder}.options.settingsRequest.events.onComplete",
             listener: "gpii.test.verifyStatusCodeResponse",
-            args: ["{arguments}.0", "{settingsRequest}", "{testCaseHolder}.options.expectedStatusCode"]
+            args: ["{arguments}.0", "{testCaseHolder}.options.settingsRequest", "{testCaseHolder}.options.expectedStatusCode"]
         }
     ]
 });
@@ -281,7 +242,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.disruption.settingsWrongAcce
 });
 
 // Main tests that contain all test cases
-gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
+gpii.tests.cloud.oauth2.settingsGetTestsWithSrVersion = [
     // Successful use cases that request settings for an existing GPII key.
     // The client credential used in this test doesn't require the IP verification step (allowedIPBlocks === null).
     {
@@ -291,65 +252,15 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
             // The options below are for sending /access_token request
             client_id: "pilot-computer",
             client_secret: "pilot-computer-secret",
-            username: "os_gnome",
+            // username: "os_gnome",
+            username: "os_win",
             password: "dummy",
 
             // The options below are required for sending /settings
-            gpiiKey: "os_gnome",
-            expectedPreferences: {
-                "contexts": {
-                    "gpii-default": {
-                        "name": "Default preferences",
-                        "preferences": {
-                            "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
-                                "mag-factor": 1.5,
-                                "screen-position": "full-screen"
-                            },
-                            "http://registry.gpii.net/applications/org.gnome.desktop.interface": {
-                                "cursor-size": 90,
-                                "text-scaling-factor": 0.75
-                            },
-                            "http://registry.gpii.net/applications/org.alsa-project": {
-                                "masterVolume": 50
-                            }
-                        }
-                    }
-                }
-            },
-            expectedMatchMakerOutput: {
-                "inferredConfiguration": {
-                    "gpii-default": {
-                        "applications": {
-                            "org.gnome.desktop.a11y.magnifier": {
-                                "active": true,
-                                "settings": {
-                                    "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
-                                        "mag-factor": 1.5,
-                                        "screen-position": "full-screen"
-                                    }
-                                }
-                            },
-                            "org.gnome.desktop.interface": {
-                                "active": true,
-                                "settings": {
-                                    "http://registry.gpii.net/applications/org.gnome.desktop.interface": {
-                                        "cursor-size": 90,
-                                        "text-scaling-factor": 0.75
-                                    }
-                                }
-                            },
-                            "org.alsa-project": {
-                                "active": true,
-                                "settings": {
-                                    "http://registry.gpii.net/applications/org.alsa-project": {
-                                        "masterVolume": 50
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            // gpiiKey: "os_gnome",
+            gpiiKey: "os_win",
+            expectedPreferences: gpii.tests.cloud.oauth2.settingsGet.testData.expectedPreferences,
+            expectedMatchMakerOutput: gpii.tests.cloud.oauth2.settingsGet.testData.expectedMatchMakerOutput
         },
         disruptions: [{
             sequenceGrade: "gpii.tests.cloud.oauth2.settingsGet.disruption.mainSequence"
@@ -365,65 +276,13 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
             // The options below are for sending /access_token request
             client_id: "pilot-computer-schemaV0.1",
             client_secret: "pilot-computer-secret-schemaV0.1",
-            username: "os_gnome",
+            username: "os_win",
             password: "dummy",
 
             // The options below are required for sending /settings
-            gpiiKey: "os_gnome",
-            expectedPreferences: {
-                "contexts": {
-                    "gpii-default": {
-                        "name": "Default preferences",
-                        "preferences": {
-                            "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
-                                "mag-factor": 1.5,
-                                "screen-position": "full-screen"
-                            },
-                            "http://registry.gpii.net/applications/org.gnome.desktop.interface": {
-                                "cursor-size": 90,
-                                "text-scaling-factor": 0.75
-                            },
-                            "http://registry.gpii.net/applications/org.alsa-project": {
-                                "masterVolume": 50
-                            }
-                        }
-                    }
-                }
-            },
-            expectedMatchMakerOutput: {
-                "inferredConfiguration": {
-                    "gpii-default": {
-                        "applications": {
-                            "org.gnome.desktop.a11y.magnifier": {
-                                "active": true,
-                                "settings": {
-                                    "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
-                                        "mag-factor": 1.5,
-                                        "screen-position": "full-screen"
-                                    }
-                                }
-                            },
-                            "org.gnome.desktop.interface": {
-                                "active": true,
-                                "settings": {
-                                    "http://registry.gpii.net/applications/org.gnome.desktop.interface": {
-                                        "cursor-size": 90,
-                                        "text-scaling-factor": 0.75
-                                    }
-                                }
-                            },
-                            "org.alsa-project": {
-                                "active": true,
-                                "settings": {
-                                    "http://registry.gpii.net/applications/org.alsa-project": {
-                                        "masterVolume": 50
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            gpiiKey: "os_win",
+            expectedPreferences: gpii.tests.cloud.oauth2.settingsGet.testData.expectedPreferences,
+            expectedMatchMakerOutput: gpii.tests.cloud.oauth2.settingsGet.testData.expectedMatchMakerOutput
         },
         disruptions: [{
             sequenceGrade: "gpii.tests.cloud.oauth2.settingsGet.disruption.mainSequence"
@@ -440,65 +299,13 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
             // The options below are for sending /access_token request
             client_id: "nova-computer",
             client_secret: "nova-computer-secret",
-            username: "os_gnome",
+            username: "os_win",
             password: "dummy",
 
             // The options below are required for sending /settings
-            gpiiKey: "os_gnome",
-            expectedPreferences: {
-                "contexts": {
-                    "gpii-default": {
-                        "name": "Default preferences",
-                        "preferences": {
-                            "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
-                                "mag-factor": 1.5,
-                                "screen-position": "full-screen"
-                            },
-                            "http://registry.gpii.net/applications/org.gnome.desktop.interface": {
-                                "cursor-size": 90,
-                                "text-scaling-factor": 0.75
-                            },
-                            "http://registry.gpii.net/applications/org.alsa-project": {
-                                "masterVolume": 50
-                            }
-                        }
-                    }
-                }
-            },
-            expectedMatchMakerOutput: {
-                "inferredConfiguration": {
-                    "gpii-default": {
-                        "applications": {
-                            "org.gnome.desktop.a11y.magnifier": {
-                                "active": true,
-                                "settings": {
-                                    "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
-                                        "mag-factor": 1.5,
-                                        "screen-position": "full-screen"
-                                    }
-                                }
-                            },
-                            "org.gnome.desktop.interface": {
-                                "active": true,
-                                "settings": {
-                                    "http://registry.gpii.net/applications/org.gnome.desktop.interface": {
-                                        "cursor-size": 90,
-                                        "text-scaling-factor": 0.75
-                                    }
-                                }
-                            },
-                            "org.alsa-project": {
-                                "active": true,
-                                "settings": {
-                                    "http://registry.gpii.net/applications/org.alsa-project": {
-                                        "masterVolume": 50
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            gpiiKey: "os_win",
+            expectedPreferences: gpii.tests.cloud.oauth2.settingsGet.testData.expectedPreferences,
+            expectedMatchMakerOutput: gpii.tests.cloud.oauth2.settingsGet.testData.expectedMatchMakerOutput
         },
         disruptions: [{
             sequenceGrade: "gpii.tests.cloud.oauth2.settingsGet.disruption.mainSequence"
@@ -530,6 +337,30 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
         }]
     },
 
+    // Rejected by /settings endpoint
+    {
+        testDef: {
+            name: "Attempt to retrieve user settings without providing an access token",
+            gpiiKey: "os_gnome"
+        },
+        disruptions: [{
+            sequenceGrade: "gpii.tests.cloud.oauth2.settingsGet.disruption.settingsNoAccessTokenSequence",
+            expectedStatusCode: 401
+        }]
+    },
+    {
+        testDef: {
+            name: "Attempt to retrieve user settings by providing a wrong access token",
+            gpiiKey: "os_gnome"
+        },
+        disruptions: [{
+            sequenceGrade: "gpii.tests.cloud.oauth2.settingsGet.disruption.settingsWrongAccessTokenSequence",
+            expectedStatusCode: 401
+        }]
+    }
+];
+
+gpii.tests.cloud.oauth2.settingsGetTestsWithoutSrVersion = [
     // Rejected by /access_token endpoint
     {
         testDef: {
@@ -592,28 +423,6 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
             password: "dummy"
         },
         disruptions: gpii.tests.cloud.oauth2.settingsGet.reject
-    },
-
-    // Rejected by /settings endpoint
-    {
-        testDef: {
-            name: "Attempt to retrieve user settings without providing an access token",
-            gpiiKey: "os_gnome"
-        },
-        disruptions: [{
-            sequenceGrade: "gpii.tests.cloud.oauth2.settingsGet.disruption.settingsNoAccessTokenSequence",
-            expectedStatusCode: 401
-        }]
-    },
-    {
-        testDef: {
-            name: "Attempt to retrieve user settings by providing a wrong access token",
-            gpiiKey: "os_gnome"
-        },
-        disruptions: [{
-            sequenceGrade: "gpii.tests.cloud.oauth2.settingsGet.disruption.settingsWrongAccessTokenSequence",
-            expectedStatusCode: 401
-        }]
     }
 ];
 
@@ -622,8 +431,25 @@ gpii.tests.cloud.oauth2.settingsGet.verifyRefetchedAccessToken = function (body,
     jqUnit.assertNotEquals("A new access token is issued at the refetch", initialAccessTokenRequest.access_token, refetchAccessTokenRequest.access_token);
 };
 
-gpii.tests.cloud.oauth2.settingsGet.verifyPayloadMatchMakerOutput = function (body, expectedPreferences, expectedMatchMakerOutput) {
+gpii.tests.cloud.oauth2.settingsGet.verifyPayloadMatchMakerOutput = function (body, expectedPreferences, expectedMatchMakerOutput, solutionToVerify, expectedSr) {
     var payload = JSON.parse(body);
-    jqUnit.assertDeepEq("Verify expected preferences", expectedPreferences, payload.preferences);
-    jqUnit.assertDeepEq("Verify expected matchMakerOutput", expectedMatchMakerOutput, payload.matchMakerOutput);
+    jqUnit.assertDeepEq("Verify returned preferences", expectedPreferences, payload.preferences);
+    jqUnit.assertDeepEq("Verify returned matchMakerOutput", expectedMatchMakerOutput, payload.matchMakerOutput);
+
+    if (solutionToVerify && expectedSr) {
+        var actualSettingsHandlers = fluid.get(payload, ["solutionsRegistryEntries", solutionToVerify, "settingsHandlers"]);
+        jqUnit.assertDeepEq("Verify returned settings handler for com.microsoft.windows.stickyKeys is in the correct solution registry version", expectedSr, actualSettingsHandlers);
+    }
+};
+
+gpii.tests.cloud.oauth2.settingsGet.buildTestDefs = function (testCases, srVersionInfos) {
+    var testCasesTogo = [];
+    fluid.each(testCases, function (testCase) {
+        fluid.each(srVersionInfos, function (srVersionInfo) {
+            var transformedTestDef = fluid.extend(testCase.testDef, srVersionInfo);
+            fluid.set(testCase, ["testDef"], transformedTestDef);
+            testCasesTogo.push(testCase);
+        });
+    });
+    return testCasesTogo;
 };

@@ -68,7 +68,7 @@ filenames.forEach(function (filename) {
                     fs.mkdirSync(subDir);
                     console.log("Created version " + i + " subdirectory: ", subDir);
                 }
-                var transformed = gpii.solutionsRegistry.transformSolutionsBtwVersions(srContent, currentVersion, i);
+                var transformed = gpii.solutionsRegistry.transformSolutionsBtwVersions(srContent, platform, currentVersion, i);
 
                 var targetFile = subDir + "/" + filename;
                 fs.writeFileSync(targetFile, JSON.stringify(transformed, null, 4));

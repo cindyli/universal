@@ -16,7 +16,7 @@ var fluid = require("infusion"),
 
 fluid.require("%gpii-universal");
 require("./DisruptionSettingsSequenceGradeConfig.js");
-require("../../shared/FlowManagerSettingsPutTestDefs.js");
+require("../../shared/SettingsPutTestDefs.js");
 
 fluid.registerNamespace("gpii.tests.cloud.oauth2.settingsPut");
 gpii.loadTestingSupport();
