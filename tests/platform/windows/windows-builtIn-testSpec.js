@@ -625,7 +625,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
                         "No": "%SystemRoot%\\cursors\\no_l.cur",
-                        "Hand": "",
+                        "Hand": "%SystemRoot%\\cursors\\wait_l.cur",
                         "Help": "%SystemRoot%\\cursors\\help_l.cur",
                         "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
                         "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
@@ -1086,10 +1086,10 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "FilterKeysEnable": {
-                                "value": false
+                                "value": true
                             },
                             "BounceKeysInterval": {
-                                "value": 0
+                                "value": 1000
                             }
                         },
                         "options": {
@@ -1138,7 +1138,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
                         "No": "%SystemRoot%\\cursors\\no_l.cur",
-                        "Hand": "",
+                        "Hand": "%SystemRoot%\\cursors\\wait_l.cur",
                         "Help": "%SystemRoot%\\cursors\\help_l.cur",
                         "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
                         "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
@@ -1327,10 +1327,10 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "FilterKeysEnable": {
-                                "value": false
+                                "value": true
                             },
                             "BounceKeysInterval": {
-                                "value": 0
+                                "value": 1000
                             }
                         },
                         "options": {
@@ -1379,7 +1379,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
                         "No": "%SystemRoot%\\cursors\\no_l.cur",
-                        "Hand": "",
+                        "Hand": "%SystemRoot%\\cursors\\wait_l.cur",
                         "Help": "%SystemRoot%\\cursors\\help_l.cur",
                         "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
                         "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
@@ -1568,10 +1568,10 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "FilterKeysEnable": {
-                                "value": false
+                                "value": true
                             },
                             "BounceKeysInterval": {
-                                "value": 0
+                                "value": 1000
                             }
                         },
                         "options": {
@@ -1620,7 +1620,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
                         "No": "%SystemRoot%\\cursors\\no_l.cur",
-                        "Hand": "",
+                        "Hand": "%SystemRoot%\\cursors\\wait_l.cur",
                         "Help": "%SystemRoot%\\cursors\\help_l.cur",
                         "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
                         "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
