@@ -167,6 +167,7 @@ gpii.tests.cloud.oauth2.settingsGet.testData = {
                         "schema": {
                             "title": "Sticky Keys On",
                             "description": "Whether or not sticky keys should be turned on.",
+                            "type": "object",
                             "properties": {
                                 "path": {
                                     "oneOf": [

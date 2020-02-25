@@ -5085,8 +5085,8 @@
                             "title": "Desktop wallpaper tiling",
                             "description": "Sets the wallpaper to tiling style.",
                             "enum": [
-                                0,
-                                1
+                                "0",
+                                "1"
                             ],
                             "enumLabels": [
                                 "off",
@@ -5099,11 +5099,11 @@
                             "title": "Desktop wallpaper style",
                             "description": "Sets the wallpaper style.",
                             "enum": [
-                                0,
-                                2,
-                                6,
-                                10,
-                                22
+                                "0",
+                                "2",
+                                "6",
+                                "10",
+                                "22"
                             ],
                             "enumLabels": [
                                 "None",
@@ -5143,15 +5143,15 @@
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackground.Scaling",
                             "match": {
-                                "Fill": 0,
-                                "Fit": 0,
-                                "Stretch": 0,
-                                "Tile": 1,
-                                "Center": 0,
-                                "Span": 0
+                                "Fill": "0",
+                                "Fit": "0",
+                                "Stretch": "0",
+                                "Tile": "1",
+                                "Center": "0",
+                                "Span": "0"
                             },
                             "noMatch": {
-                                "outputValue": 0
+                                "outputValue": "0"
                             }
                         }
                     },
@@ -5160,15 +5160,15 @@
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackground.Scaling",
                             "match": {
-                                "Fill": 6,
-                                "Fit": 10,
-                                "Stretch": 2,
-                                "Tile": 0,
-                                "Center": 0,
-                                "Span": 22
+                                "Fill": "6",
+                                "Fit": "10",
+                                "Stretch": "2",
+                                "Tile": "0",
+                                "Center": "0",
+                                "Span": "22"
                             },
                             "noMatch": {
-                                "outputValue": 6
+                                "outputValue": "6"
                             }
                         }
                     }
@@ -5224,6 +5224,7 @@
                         "schema": {
                             "title": "Desktop background wallpaper",
                             "description": "The path to the image to be set as the new desktop wallpaper.",
+                            "type": "object",
                             "properties": {
                                 "value": {
                                     "type": "string",
@@ -5302,6 +5303,7 @@
                         "schema": {
                             "title": "Desktop background wallpaper",
                             "description": "The path to the image to be set as the new desktop wallpaper.",
+                            "type": "object",
                             "properties": {
                                 "value": {
                                     "type": "string",
@@ -5495,7 +5497,7 @@
                             "title": "Application Startup Cursor",
                             "description": "The animated cursor that displays while an application is starting up.",
                             "type": "string",
-                            "default": "%SystemRoot%\\cursors\\aero_working.ani"
+                            "default": "%SystemRoot%\\cursors\\wait_i.ani"
                         }
                     },
                     "Arrow": {
@@ -5503,7 +5505,7 @@
                             "title": "Arrow Cursor",
                             "description": "The 'arrow' cursor icon.",
                             "type": "string",
-                            "default": "%SystemRoot%\\cursors\\aero_arrow.cur"
+                            "default": "%SystemRoot%\\cursors\\arrow_i.cur"
                         }
                     },
                     "Crosshair": {
@@ -5518,7 +5520,7 @@
                             "title": "Hand Cursor",
                             "description": "The 'hand' cursor icon.",
                             "type": "string",
-                            "default": "%SystemRoot%\\cursors\\aero_link.cur"
+                            "default": ""
                         }
                     },
                     "Help": {
@@ -5526,7 +5528,7 @@
                             "title": "Help Cursor",
                             "description": "The 'help' cursor icon.",
                             "type": "string",
-                            "default": "%SystemRoot%\\cursors\\aero_helpsel.cur"
+                            "default": "%SystemRoot%\\cursors\\help_i.cur"
                         }
                     },
                     "IBeam": {
@@ -5541,7 +5543,7 @@
                             "title": "'No' Cursor",
                             "description": "The cursor icon used to indicate that the resource under the pointer cannot be clicked.",
                             "type": "string",
-                            "default": "%SystemRoot%\\cursors\\aero_unavail.cur"
+                            "default": "%SystemRoot%\\cursors\\no_l.cur"
                         }
                     },
                     "NWPen": {
@@ -5549,7 +5551,7 @@
                             "title": "Pen Cursor",
                             "description": "The 'pen' cursor icon.",
                             "type": "string",
-                            "default": "%SystemRoot%\\cursors\\aero_pen.cur"
+                            "default": "%SystemRoot%\\cursors\\pen_i.cur"
                         }
                     },
                     "SizeAll": {
@@ -5557,7 +5559,7 @@
                             "title": "'Resize All' Cursor",
                             "description": "The 'resize all' cursor icon.",
                             "type": "string",
-                            "default": "%SystemRoot%\\cursors\\aero_move.cur"
+                            "default": "%SystemRoot%\\cursors\\move_i.cur"
                         }
                     },
                     "SizeNESW": {
@@ -5565,7 +5567,7 @@
                             "title": "'Resize NESW' Cursor",
                             "description": "The 'resize NESW' cursor icon.",
                             "type": "string",
-                            "default": "%SystemRoot%\\cursors\\aero_nesw.cur"
+                            "default": "%SystemRoot%\\cursors\\size1_i.cur"
                         }
                     },
                     "SizeNS": {
@@ -5573,7 +5575,7 @@
                             "title": "'Resize Height' Cursor",
                             "description": "The 'resize height' cursor icon.",
                             "type": "string",
-                            "default": "%SystemRoot%\\cursors\\aero_ns.cur"
+                            "default": "%SystemRoot%\\cursors\\size4_i.cur"
                         }
                     },
                     "SizeNWSE": {
@@ -5581,7 +5583,7 @@
                             "title": "'Resize NWSE' Cursor",
                             "description": "The 'resize NWSE' cursor icon.",
                             "type": "string",
-                            "default": "%SystemRoot%\\cursors\\aero_nwse.cur"
+                            "default": "%SystemRoot%\\cursors\\size2_i.cur"
                         }
                     },
                     "SizeWE": {
@@ -5589,7 +5591,7 @@
                             "title": "'Resize WE' Cursor",
                             "description": "The 'resize WE' cursor icon.",
                             "type": "string",
-                            "default": "%SystemRoot%\\cursors\\aero_ew.cur"
+                            "default": "%SystemRoot%\\cursors\\size3_i.cur"
                         }
                     },
                     "UpArrow": {
@@ -5597,7 +5599,7 @@
                             "title": "'Up Arrow' Cursor",
                             "description": "The 'up arrow' cursor icon.",
                             "type": "string",
-                            "default": "%SystemRoot%\\cursors\\aero_up.cur"
+                            "default": "%SystemRoot%\\cursors\\up_i.cur"
                         }
                     },
                     "Wait": {
@@ -5605,7 +5607,7 @@
                             "title": "'Wait' Cursor",
                             "description": "The cursor icon to display while the system is busy.",
                             "type": "string",
-                            "default": "%SystemRoot%\\cursors\\aero_busy.ani"
+                            "default": "%SystemRoot%\\cursors\\busy_i.ani"
                         }
                     }
                 },
@@ -5791,7 +5793,7 @@
                             "ranges": [
                                 {
                                     "upperBound": 0.333,
-                                    "output": "%SystemRoot%\\cursors\\aero_busy.ani"
+                                    "output": "%SystemRoot%\\cursors\\busy_i.ani"
                                 },
                                 {
                                     "upperBound": 0.666,
@@ -6577,6 +6579,7 @@
                         "schema": {
                             "title": "Slow keys interval",
                             "description": "Slow keys interval time in milliseconds",
+                            "type": "object",
                             "properties": {
                                 "value": {
                                     "required": true,
@@ -6819,6 +6822,7 @@
                         "schema": {
                             "title": "High Contrast",
                             "description": "Whether to enable/disable High Contrast",
+                            "type": "object",
                             "properties": {
                                 "value": {
                                     "required": true,
@@ -8077,6 +8081,7 @@
                         "schema": {
                             "title": "Mouse keys",
                             "description": "Enable/Disable mouse keys",
+                            "type": "object",
                             "properties": {
                                 "value": {
                                     "required": true,
@@ -8277,6 +8282,7 @@
                         "schema": {
                             "title": "Swap mouse primary button",
                             "description": "Swap mouse left/right buttons",
+                            "type": "object",
                             "properties": {
                                 "value": {
                                     "required": true,
@@ -8347,6 +8353,7 @@
                         "schema": {
                             "title": "Mouse scroll wheel mode",
                             "description": "Changes the number of lines to scroll when moving the scrollwheel.",
+                            "type": "object",
                             "properties": {
                                 "value": {
                                     "required": true,
@@ -8426,6 +8433,7 @@
                         "schema": {
                             "title": "Mouse scroll focus routing",
                             "description": "Changes the way mouse scrolling is passed to applications.",
+                            "type": "object",
                             "properties": {
                                 "value": {
                                     "required": true,
@@ -8492,6 +8500,7 @@
                         "schema": {
                             "title": "Mouse cursor shadow",
                             "description": "Enables or disables mouse cursor shadow.",
+                            "type": "object",
                             "properties": {
                                 "value": {
                                     "required": true,
@@ -8552,6 +8561,7 @@
                         "schema": {
                             "title": "Mouse wheel horizontal scroll",
                             "description": "Changes the number of chars that are scrolled horizontally.",
+                            "type": "object",
                             "properties": {
                                 "value": {
                                     "required": true,
@@ -8617,6 +8627,7 @@
                         "schema": {
                             "title": "Mouse Windows tracking",
                             "description": "Windows are focused when mouse is stopped over them.",
+                            "type": "object",
                             "properties": {
                                 "value": {
                                     "required": true,
@@ -8677,6 +8688,7 @@
                         "schema": {
                             "title": "Windows Tracking",
                             "description": "Windows receive focus when mouse hovers over them.",
+                            "type": "object",
                             "properties": {
                                 "value": {
                                     "required": true,
@@ -8737,6 +8749,7 @@
                         "schema": {
                             "title": "Configures Window arrangement",
                             "description": "Enable/Disables the automatic Windows arrangment when dragging windows to border with mouse.",
+                            "type": "object",
                             "properties": {
                                 "value": {
                                     "required": true,
@@ -8794,10 +8807,15 @@
                         "schema": {
                             "title": "Double click time",
                             "description": "Changes the amount of time that can elapse between a first click and a second click for the OS to consider the mouse action a double-click.",
-                            "type": "integer",
-                            "default": 500,
-                            "minimum": 500,
-                            "maximum": 5000
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "integer",
+                                    "default": 500,
+                                    "minimum": 500,
+                                    "maximum": 5000
+                                }
+                            }
                         }
                     }
                 },
@@ -8827,6 +8845,7 @@
                         "schema": {
                             "title": "Configures pointer speed",
                             "description": "Selects a pointer speed.",
+                            "type": "object",
                             "properties": {
                                 "value": {
                                     "required": true,
@@ -8891,6 +8910,7 @@
                         "schema": {
                             "title": "Enhance pointer precision",
                             "description": "Enable/Disables enhanced pointer precision.",
+                            "type": "object",
                             "properties": {
                                 "value": {
                                     "required": true,
@@ -8967,6 +8987,7 @@
                         "schema": {
                             "title": "Snap To",
                             "description": "Automatically move pointer to the default button in a dialogue.",
+                            "type": "object",
                             "properties": {
                                 "value": {
                                     "required": true,
@@ -9030,6 +9051,7 @@
                         "schema": {
                             "title": "Hide pointer while typing",
                             "description": "Enable/Disables hiding the pointer while typing.",
+                            "type": "object",
                             "properties": {
                                 "value": {
                                     "required": true,
@@ -9090,6 +9112,7 @@
                         "schema": {
                             "title": "Mouse sonar",
                             "description": "Enable/Disable showing mouse location when pressing the CTRL key.",
+                            "type": "object",
                             "properties": {
                                 "value": {
                                     "required": true,
@@ -9144,11 +9167,16 @@
                         "schema": {
                             "title": "Double-click rectangle width",
                             "description": "Changes the width of the rectangle in which a second click should fall for OS to consider the mouse action a double-click.",
-                            "type": "integer",
-                            "default": 4,
-                            "minimum": 1,
-                            "maximum": 64,
-                            "multipleOf": 1
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "integer",
+                                    "default": 4,
+                                    "minimum": 1,
+                                    "maximum": 64,
+                                    "multipleOf": 1
+                                }
+                            }
                         }
                     }
                 },
@@ -9172,11 +9200,16 @@
                         "schema": {
                             "title": "Double-click rectangle height",
                             "description": "Changes the height of the rectangle in which a second click should fall for OS to consider the mouse action a double-click.",
-                            "type": "integer",
-                            "default": 4,
-                            "minimum": 1,
-                            "maximum": 64,
-                            "multipleOf": 1
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "integer",
+                                    "default": 4,
+                                    "minimum": 1,
+                                    "maximum": 64,
+                                    "multipleOf": 1
+                                }
+                            }
                         }
                     }
                 },
@@ -9223,6 +9256,7 @@
                         "schema": {
                             "title": "Mouse trails",
                             "description": "Amount of mouse trailing",
+                            "type": "object",
                             "properties": {
                                 "value": {
                                     "required": true,
@@ -10519,6 +10553,7 @@
                         "schema": {
                             "title": "Sticky Keys On",
                             "description": "Whether or not sticky keys should be turned on.",
+                            "type": "object",
                             "properties": {
                                 "value": {
                                     "type": "boolean",
@@ -10597,19 +10632,24 @@
                         "schema": {
                             "title": "Touchpad sensitivity",
                             "description": "Changes Windows 10 precision touchpad sensitivity.",
-                            "default": "Medium sensitivity",
-                            "enum": [
-                                "Low sensitivity",
-                                "Medium sensitivity",
-                                "High sensitivity",
-                                "Most sensitive"
-                            ],
-                            "enumLabels": [
-                                "Low sensitivity",
-                                "Medium sensitivity",
-                                "High sensitivity",
-                                "Most sensitive"
-                            ]
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "default": "Medium sensitivity",
+                                    "enum": [
+                                        "Low sensitivity",
+                                        "Medium sensitivity",
+                                        "High sensitivity",
+                                        "Most sensitive"
+                                    ],
+                                    "enumLabels": [
+                                        "Low sensitivity",
+                                        "Medium sensitivity",
+                                        "High sensitivity",
+                                        "Most sensitive"
+                                    ]
+                                }
+                            }
                         }
                     }
                 },
